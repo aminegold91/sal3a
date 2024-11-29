@@ -5,9 +5,7 @@ const cors = require("cors"); // استيراد مكتبة CORS
 
 const app = express();
 
-// app.get("/", (req, res) => {
-//   res.send("Welcome to the Server! Use /data to interact with the JSON data.");
-// });
+
 const path = require("path");
 
 app.get("/", (req, res) => {
