@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض البيانات</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>بيانات المنتجات</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>img</th>
+        <th>اسم المنتج</th>
+        <th>السعر</th>
+        <th>الوصف</th>
+      </tr>
+    </thead>
+    <tbody id="data-table">
+      <!-- سيتم إدخال البيانات هنا -->
+    </tbody>
+  </table>
+
+  <script>
+    // جلب البيانات من الخادم
+    fetch("http://localhost:4000/data")
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById("data-table");
+        
+        // إدخال البيانات في الجدول
+        data.forEach(item => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${item.fil}</td>
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            <td>${item.description}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.error("Error fetching data:", error));
+  </script>
+</body>
+</html>
